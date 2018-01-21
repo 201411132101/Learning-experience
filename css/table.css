@@ -1,0 +1,28 @@
+/* Border styles */
+table thead, table tr {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(211, 202, 221);
+}
+table {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(211, 202, 221);
+}
+
+/* Padding and font style */
+table td, table th {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-family: SimSun;
+    color: rgb(95, 74, 121);
+}
+
+/* Alternating background colors */
+table tr:nth-child(even) {
+    background: rgb(223, 216, 232)
+}
+table tr:nth-child(odd) {
+    background: #FFF
+}
