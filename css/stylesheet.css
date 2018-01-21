@@ -14,8 +14,8 @@ table {
 table td, table th {
     text-align: center;
     padding: 10px 20px;
-    font-size: 12px;
-    font-family: SimSun;
+    font-size: 18px;
+    font-family: Microsoft YaHei;
     color: rgb(95, 74, 121);
 }
 
@@ -25,4 +25,17 @@ table tr:nth-child(even) {
 }
 table tr:nth-child(odd) {
     background: #FFF
+}
+
+a:link, #left a:visited, #left a:hover, #left a:active {
+    text-decoration:none;
+    color:#6633FF;
+}
+
+html,body {
+    background:#F6F4EC;
+}
+#page {
+    margin:0 auto;
+    width:600px;
 }
