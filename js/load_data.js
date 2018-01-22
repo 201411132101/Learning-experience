@@ -20,12 +20,8 @@ function load_data(name) {
                 str += "<td>" + object.get("type") + "</td>";
                 str += "<td>" + object.get("time") + "</td>";
                 str += "<td>" + object.get("suffix") + "</td>";
-                str += "<td><a href=\"" + object.get("link") + "\">百度云</a></td>";
                 str += "<td>" + object.get("upload") + "</td>";
-                str += "</tr>";
-
-                str += "<tr>";
-                str += "<td colspan=\"7\">" + object.get("note") + "</td>";
+                str += "<td><a href=\"" + object.get("link") + "\">下载</a></td>";
                 str += "</tr>";
             }
             // 加载数据到表格
