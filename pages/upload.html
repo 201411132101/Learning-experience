@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据上传</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.3.0.min.js"></script>
+    <script src="../bmob-min.js"></script>
+    <link href="../css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<!--header-->
+<h2 align="center">BNU Math</h2>
+
+<!--page-->
+<form action="" method="post" class="elegant-aero">
+    <h1>数据上传
+        <span>请严格按照样例填写内容</span>
+    </h1>
+    <label>
+        <span>课程名字 :</span><select name="selection">
+        <option value="Job Inquiry">Job Inquiry</option>
+        <option value="General Question">General Question</option>
+    </select>
+    </label>
+    <label>
+        <span>授课老师 :</span>
+        <input name="teacher" type="text" placeholder="黄海洋" />
+    </label>
+
+    <label>
+        <span>考试类型 :</span>
+        <input name="type" type="text" placeholder="期中, 期末, 小测···" />
+    </label>
+    <label>
+        <span>考试时间 :</span>
+        <input name="time" type="text" placeholder="14-15" />
+    </label>
+    <label>
+        <span>文件格式 :</span>
+        <input id="suffix" type="text" placeholder="pdf, doc, jpg···" />
+    </label>
+    <label>
+        <span>下载链接 :</span>
+        <input name="link" type="text" placeholder="我相信你知道怎么填" />
+    </label>
+    <label>
+        <span>上传人 :</span>
+        <input name="upload" type="text" placeholder="涂山苏苏" />
+    </label>
+    <label>
+        <span>&nbsp;</span>
+        <input type="button" class="button" value="Send" />
+    </label>
+</form>
+
+<!--footer-->
+<h5 align="center" id="total_times">footer</h5>
+
+</body>
+
+<script>
+    // 连接服务器
+    Bmob.initialize("93ff7bcca8c4da59f4261fbbbfead4ac", "76f42afc1eaca8da85cbbca9eed06800");
+</script>
+<script src="../js/update_footer.js"></script>
+<script src="../js/load_footer.js"></script>
+
+</html>
