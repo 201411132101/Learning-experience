@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>动漫人物查询与添加</title>
+    <script src="https://code.jquery.com/jquery-3.3.0.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
+    <script src="../bmob-min.js"></script>
+    <link href="../css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<!--header-->
+<h2 align="center">BNU Math</h2>
+
+<!--page-->
+<div id="page">
+    <ul class="nav" id="acg">
+    </ul>
+    <form class="elegant-aero" id="acg_form">
+        <label>
+            <span>名字 :</span>
+            <input name="name" type="text" />
+        </label>
+        <label>
+            <span>&nbsp;</span>
+            <input type="button" class="button" value="上传" id="submit" />
+        </label>
+    </form>
+</div>
+
+
+<!--footer-->
+<h5 align="center" id="total_times">footer</h5>
+
+</body>
+
+<script>
+    // 连接服务器
+    Bmob.initialize("93ff7bcca8c4da59f4261fbbbfead4ac", "76f42afc1eaca8da85cbbca9eed06800");
+</script>
+<script src="../js/load_footer.js"></script>
+<script>
+    // 加载 acg 中数据
+    var Data = Bmob.Object.extend("Acg");
+    var query = new Bmob.Query(Data);
+
+    // 按添加时间降序排列
+    query.descending("createdAt");
+
+    // 查询所有数据
+    var str = "";
+    query.find({
+        success: function(results) {
+            // 循环处理查询到的数据
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+
+                str += "<li><a href=\"\">" + object.get("name") + "</a></li>";
+            }
+            // 加载数据到表格
+            $("#acg").html(str);
+        },
+        error: function(error) {
+            alert("查询失败: " + error.code + " " + error.message);
+        }
+    });
+    });
+</script>
+<script>
+    $("#submit").click(function() {
+        var Data = Bmob.Object.extend("Acg");
+        var data = new Data();
+        // 添加数据，第一个入口参数是Json数据
+        console.log($("#acg_form").serializeJSON());
+        data.save($("#acg_form").serializeJSON(), {
+            success: function(gameScore) {
+                // 添加成功
+                location.reload();
+            },
+            error: function(gameScore, error) {
+                alert("添加失败: " + error.code + " " + error.message);
+            }
+        });
+    });
+</script>
+
+</html>

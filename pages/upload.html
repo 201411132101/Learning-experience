@@ -49,7 +49,7 @@
     </label>
     <label>
         <span>上传人 :</span>
-        <input name="upload" type="text" placeholder="涂山苏苏" />
+        <input name="upload" type="text" id="acg" />
     </label>
     <label>
         <span>&nbsp;</span>
@@ -66,7 +66,25 @@
     // 连接服务器
     Bmob.initialize("93ff7bcca8c4da59f4261fbbbfead4ac", "76f42afc1eaca8da85cbbca9eed06800");
 </script>
-<script src="../js/update_footer.js"></script>
 <script src="../js/load_footer.js"></script>
+<script>
+    // 加载 acg 中数据
+    var Data = Bmob.Object.extend("Acg");
+    var query = new Bmob.Query(Data);
+
+    // 查询数据
+    query.find({
+        success: function(results) {
+            // 随机选取一人名字
+            var k = Math.floor(Math.random()* results.length);
+            var str = results[k].get("name");
+            // 加载数据到表格
+            $("#acg").attr('placeholder',str);
+        },
+        error: function(error) {
+            alert("查询失败: " + error.code + " " + error.message);
+        }
+    });
+</script>
 
 </html>
