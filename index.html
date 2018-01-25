@@ -17,19 +17,7 @@
 
 <!--page-->
 <div id="page">
-    <ul class="nav">
-        <li><a href="">数学分析</a></li>
-        <li><a href="">代数学基础</a></li>
-        <li><a href="">常微分方程</a></li>
-        <li><a href="pages/pde.html">偏微分方程</a></li>
-        <li><a href="pages/complex_function.html">复变函数</a></li>
-        <li><a href="">实变函数</a></li>
-        <li><a href="pages/data_structure.html">数据结构</a></li>
-        <li><a href="">概率论</a></li>
-        <li><a href="">统计学基础</a></li>
-        <li><a href="">泛函分析</a></li>
-        <li><a href="">拓扑学</a></li>
-        <li><a href="pages/upload.html">上传数据</a></li>
+    <ul class="nav" id="my_list">
     </ul>
 </div>
 
@@ -55,5 +43,31 @@
 </script>
 <script src="js/update_footer.js"></script>
 <script src="js/load_footer.js"></script>
+<script>
+    // 加载 acg 中数据
+    var Data = Bmob.Object.extend("Name");
+    var query = new Bmob.Query(Data);
+
+    // 按添加时间降序排列
+    query.ascending("name");
+
+    // 查询所有数据
+    var str = "";
+    query.find({
+        success: function(results) {
+            // 循环处理查询到的数据
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+
+                str += "<li><a href=\"pages/" + object.get("en_name") + ".html\">" + object.get("name") + "</a></li>";
+            }
+            // 加载数据到表格
+            $("#my_list").html(str);
+        },
+        error: function(error) {
+            alert("查询失败: " + error.code + " " + error.message);
+        }
+    });
+</script>
 
 </html>

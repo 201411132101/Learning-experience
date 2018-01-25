@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>基础数学1</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.3.0.min.js"></script>
+    <script src="../bmob-min.js"></script>
+    <link href="../css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<!--header-->
+<h1 align="center">BNU Math</h1>
+
+<!--page-->
+<table id="data" class="bufan" align="center">
+    <thead>
+        <th>课程名字</th>
+        <th>授课老师</th>
+        <th>考试类型</th>
+        <th>考试时间</th>
+        <th>文件格式</th>
+        <th>上传人</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<!--footer-->
+<h5 align="center" id="total_times">footer</h5>
+
+</body>
+
+<script>
+    // 连接服务器
+    Bmob.initialize("93ff7bcca8c4da59f4261fbbbfead4ac", "76f42afc1eaca8da85cbbca9eed06800");
+</script>
+<script src="../js/load_footer.js"></script>
+<script src="../js/load_data.js"></script>
+<script>
+    load_data("基础数学1");
+</script>
+
+</html>
