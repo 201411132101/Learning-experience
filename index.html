@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -61,6 +61,8 @@
 
                 str += "<li><a href=\"pages/" + object.get("en_name") + ".html\">" + object.get("name") + "</a></li>";
             }
+            str += "<li><a href=\"pages/upload.html\">数据上传</a></li>";
+
             // 加载数据到表格
             $("#my_list").html(str);
         },
