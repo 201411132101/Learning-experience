@@ -72,19 +72,33 @@
 <script src="../js/load_footer.js"></script>
 <script>
     $("#submit").click(function() {
-        var Data = Bmob.Object.extend("Data");
-        var data = new Data();
-        // 添加数据，第一个入口参数是Json数据
-        console.log($("#form").serializeJSON());
-        data.save($("#form").serializeJSON(), {
-            success: function(gameScore) {
-                // 添加成功
-                location.reload();
-            },
-            error: function(gameScore, error) {
-                alert("添加失败: " + error.code + " " + error.message);
-            }
-        });
+        var json = $("#form").serializeJSON();
+        console.log(json);
+
+        var hasEmpty = false;
+        for(var key in json){
+            if (json[key] == "")
+                hasEmpty = true;
+        }
+
+        if (hasEmpty){
+            alert("输入不能有空");
+        }
+        else{
+            var Data = Bmob.Object.extend("Data");
+            var data = new Data();
+            // 添加数据，第一个入口参数是Json数据
+
+            data.save(json, {
+                success: function(gameScore) {
+                    // 添加成功
+                    location.reload();
+                },
+                error: function(gameScore, error) {
+                    alert("添加失败: " + error.code + " " + error.message);
+                }
+            });
+        }
     });
 </script>
 <script>
