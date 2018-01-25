@@ -6,6 +6,7 @@
     <title>数据上传</title>
     <link rel="shortcut icon" href="../favicon.ico">
     <script src="https://code.jquery.com/jquery-3.3.0.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
     <script src="../bmob-min.js"></script>
     <link href="../css/stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
@@ -16,24 +17,26 @@
 <h2 align="center">BNU Math</h2>
 
 <!--page-->
-<form action="" method="post" class="elegant-aero">
+<form action="" method="post" class="elegant-aero" id="form">
     <h1>数据上传
         <span>请严格按照样例填写内容</span>
     </h1>
     <label>
-        <span>课程名字 :</span><select name="selection">
-        <option value="Job Inquiry">Job Inquiry</option>
-        <option value="General Question">General Question</option>
-    </select>
+        <span>课程名字 :</span>
+        <select name="course" id="bf_list">
+        </select>
     </label>
     <label>
         <span>授课老师 :</span>
         <input name="teacher" type="text" placeholder="黄海洋" />
     </label>
-
     <label>
         <span>考试类型 :</span>
-        <input name="type" type="text" placeholder="期中, 期末, 小测···" />
+        <select name="type">
+            <option value="期末考试">期末考试</option>
+            <option value="期中考试">期中考试</option>
+            <option value="小测">小测</option>
+        </select>
     </label>
     <label>
         <span>考试时间 :</span>
@@ -41,7 +44,7 @@
     </label>
     <label>
         <span>文件格式 :</span>
-        <input id="suffix" type="text" placeholder="pdf, doc, jpg···" />
+        <input name="suffix" type="text" placeholder="pdf, doc, jpg···" />
     </label>
     <label>
         <span>下载链接 :</span>
@@ -49,16 +52,16 @@
     </label>
     <label>
         <span>上传人 :</span>
-        <input name="upload" type="text" id="acg" />
+        <input name="upload" type="text" value="loading" id="acg" />
     </label>
     <label>
         <span>&nbsp;</span>
-        <input type="button" class="button" value="Send" />
+        <input type="button" class="button" value="上传" id="submit" />
     </label>
 </form>
 
 <!--footer-->
-<h5 align="center" id="total_times">footer</h5>
+<h5 align="center" id="total_times">loading</h5>
 
 </body>
 
@@ -75,11 +78,53 @@
     // 查询数据
     query.find({
         success: function(results) {
-            // 随机选取一人名字
             var k = Math.floor(Math.random()* results.length);
             var str = results[k].get("name");
+            console.log(k, str);
+            $("#acg").val(str);
+        },
+        error: function(error) {
+            alert("查询失败: " + error.code + " " + error.message);
+        }
+    });
+</script>
+<script>
+    $("#submit").click(function() {
+        var Data = Bmob.Object.extend("Data");
+        var data = new Data();
+        // 添加数据，第一个入口参数是Json数据
+        console.log($("#form").serializeJSON());
+        data.save($("#form").serializeJSON(), {
+            success: function(gameScore) {
+                // 添加成功
+                location.reload();
+            },
+            error: function(gameScore, error) {
+                alert("添加失败: " + error.code + " " + error.message);
+            }
+        });
+    });
+</script>
+<script>
+    // 加载课程名字选择表
+    var Data = Bmob.Object.extend("Name");
+    var query = new Bmob.Query(Data);
+
+    // 按名字升序排列
+    query.ascending("name");
+
+    // 查询所有数据
+    var str = "";
+    query.find({
+        success: function(results) {
+            // 循环处理查询到的数据
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                var name = object.get("name")
+                str += "<option value=\"" + name + "\">" + name + "</option>";
+            }
             // 加载数据到表格
-            $("#acg").attr('placeholder',str);
+            $("#bf_list").html(str);
         },
         error: function(error) {
             alert("查询失败: " + error.code + " " + error.message);

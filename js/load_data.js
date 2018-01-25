@@ -1,7 +1,10 @@
-// 加载名字为 name 的表中数据
+// 加载课程名字为 name 的表中数据
 function load_data(name) {
-    var Data = Bmob.Object.extend(name);
+    var Data = Bmob.Object.extend("Data");
     var query = new Bmob.Query(Data);
+
+    // 限制课程名字为 name
+    query.equalTo("course", name);
 
     // 按时间降序排列
     query.descending("time");
