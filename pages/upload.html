@@ -52,7 +52,7 @@
     </label>
     <label>
         <span>上传人 :</span>
-        <input name="upload" type="text" value="loading" id="acg" />
+        <input name="upload" type="text" value="Admin" id="acg" />
     </label>
     <label>
         <span>&nbsp;</span>
@@ -70,24 +70,6 @@
     Bmob.initialize("93ff7bcca8c4da59f4261fbbbfead4ac", "76f42afc1eaca8da85cbbca9eed06800");
 </script>
 <script src="../js/load_footer.js"></script>
-<script>
-    // 加载 acg 中数据
-    var Data = Bmob.Object.extend("Acg");
-    var query = new Bmob.Query(Data);
-
-    // 查询数据
-    query.find({
-        success: function(results) {
-            var k = Math.floor(Math.random()* results.length);
-            var str = results[k].get("name");
-            console.log(k, str);
-            $("#acg").val(str);
-        },
-        error: function(error) {
-            alert("查询失败: " + error.code + " " + error.message);
-        }
-    });
-</script>
 <script>
     $("#submit").click(function() {
         var Data = Bmob.Object.extend("Data");
