@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -92,7 +92,7 @@
             data.save(json, {
                 success: function(gameScore) {
                     // 添加成功
-                    location.reload();
+                    alert("添加成功"); 
                 },
                 error: function(gameScore, error) {
                     alert("添加失败: " + error.code + " " + error.message);
