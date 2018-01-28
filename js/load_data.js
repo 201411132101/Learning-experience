@@ -12,6 +12,9 @@ function load_data(name) {
     // 按时间降序排列
     query.descending("time");
 
+    // 按考试类型排列
+    query.descending("type");
+
     // 查询所有数据
     var str = "";
     query.find({
